@@ -2,9 +2,6 @@
 const fs = require('fs')
 
 let toDoList = (fs.readFileSync('list.txt', 'utf8')).split('\n');
-// console.log(toDoList);
-
-// const toDoList = [];
 let choice = process.argv[2];
 let details = process.argv[3];
 
@@ -15,7 +12,7 @@ function displayHelp() {
     if (err) {
       throw error;
     } else {
-      // console.log(data);
+      console.log(data);
     }
   });
 }
@@ -23,7 +20,7 @@ function displayHelp() {
 // list: shows current to-dos or logical text if none have been created
 
 function displayList() {
-  // console.log(toDoList)
+  console.log(toDoList)
 }
 
 // add: adds a to-do item to the list; all words are entered as one item (parameter [3])
@@ -32,7 +29,7 @@ function addToList(list, details) {
   list.push(`${details}`);
   fs.writeFile('list.txt', list, function (err) {
     if (err) throw error;
-    // console.log('Success!')
+    console.log('Success!')
   });  
   console.log(list);
   // console.log(`Your new to-do list is: ${list}`);
@@ -52,9 +49,7 @@ function main() {
   } else if (choice === 'list') {
     displayList();
   } else if (choice === 'add') {
-    // console.log(toDoList);
     addToList(toDoList, details);
-    // console.log(toDoList);
   }
 }
 
