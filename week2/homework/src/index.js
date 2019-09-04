@@ -51,7 +51,20 @@ function addToList(list, details) {
 
 // remove: remove item at index given as parameter [3], natural counting (not starting at 0)
 
-
+function removeFromList(list, details) {
+  const stats = fs.statSync("list.txt");
+  const fileSizeInBytes = stats.size;
+  if (fileSizeInBytes === 0) {
+      console.log("You can't remove an item from an empty list")
+  } else {
+    list.splice((details + 1), 1);
+    console.log(list);
+    fs.writeFile('list.txt', list, function (err) {
+      if (err) throw error;
+      console.log('Success!')
+    });
+  }
+}
 
 // reset: removes all items from the to-do list
 
@@ -72,6 +85,8 @@ function main() {
     addToList(toDoList, details);
   } else if (choice === 'reset') {
     resetList();
+  } else if (choice === 'remove') {
+    removeFromList(toDoList, details);
   }
 }
 
