@@ -25,7 +25,7 @@ function displayList() {
   if (fileSizeInBytes === 0) {
     console.log("Your to-do list is empty!")
   } else {
-    console.log(toDoList)
+    console.log(toDoList[0].split(','))
   }
 }
 
@@ -57,8 +57,8 @@ function removeFromList(list, details) {
   if (fileSizeInBytes === 0) {
       console.log("You can't remove an item from an empty list")
   } else {
-    list.splice((details + 1), 1);
-    console.log(list);
+    list = list[0].split(',')
+    list.splice((details - 1), 1);
     fs.writeFile('list.txt', list, function (err) {
       if (err) throw error;
       console.log('Success!')
@@ -77,7 +77,7 @@ function resetList() {
 
 function main() {  
     
-  if (choice === 'help') {
+  if (choice === 'help' || choice === undefined) {
     displayHelp();
   } else if (choice === 'list') {
     displayList();
