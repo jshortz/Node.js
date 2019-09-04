@@ -8,7 +8,7 @@ const details = process.argv[3];
 function displayHelp() {
   fs.readFile('helpFile.txt', 'utf8', function (err, data) {
     if (err) {
-      console.log('Something went wrong');
+      console.error('Something went wrong reading the file');
     } else {
       console.log(data);
     }
@@ -30,28 +30,35 @@ function addToList(list, newDetails) {
   const fileSizeInBytes = stats.size;
   if (fileSizeInBytes === 0) {
     fs.writeFile('list.txt', newDetails, function (err) {
-      if (err) throw error;
+      if (err) {
+        console.error('Something went wrong writing to the file');
+        throw err;
+      }
       console.log('Success!');
     });
   } else {
     list.push(`${newDetails}`);
     fs.writeFile('list.txt', list, function (err) {
-      if (err) throw error;
+      if (err) {
+        throw err;
+      }
       console.log('Success!');
     });
   }
 }
 
-function removeFromList(list, details) {
+function removeFromList(list, newDetails) {
   const stats = fs.statSync('list.txt');
   const fileSizeInBytes = stats.size;
   if (fileSizeInBytes === 0) {
     console.log('You cannot remove an item from an empty list');
   } else {
     list = list[0].split(',');
-    list.splice((details - 1), 1);
+    list.splice((newDetails - 1), 1);
     fs.writeFile('list.txt', list, function (err) {
-      if (err) throw error;
+      if (err) {
+        throw err;
+      }
       console.log('Success!');
     });
   }
@@ -59,7 +66,9 @@ function removeFromList(list, details) {
 
 function resetList() {
   fs.writeFile('list.txt', '', function (err) {
-    if (err) throw error;
+    if (err) {
+      throw err;
+    }
     console.log('Success!');
   });
 }
