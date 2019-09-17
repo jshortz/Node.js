@@ -1,0 +1,18 @@
+This program is intended to create and manage a simple to-do list. 
+
+You can enter the following commands as node index.js _command_name_:
+
+list: will show you your to-do list
+
+add: this will add one item to the to-do list. Any text you enter after 'add' should be enclosed in quotation marks 
+    and will be considered as one item on the list.
+    -example: node index.js add "Buy Milk" - adds Buy Milk to the to-do list as one item
+    -example: node index.js add "Buy Milk Buy Butter" - adds Buy Milk Buy Butter to the to-do list as one item 
+
+remove: this will remove one item from the to-do list. The text you enter after 'remove' tells the program
+    which item to remove. 
+    -example: node index.js remove 2 - will remove the second item on your to-do list
+
+reset: will completely clear your to-do list
+
+help: will display this help file to you
